@@ -11,10 +11,12 @@ import model.Location;
 import model.TextBlock;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -30,15 +32,31 @@ public class Main {
                 "Henry,Carl,Arthur,Ryan,Roger";
 
         List<TextBlock> blocks = Utils.splitTextIntoBlocks(urlAsString);
-        List<Map<String, List<Location>>> list = new ArrayList<>();
-
-        for (int i = 0; i < blocks.size() ; i++) {
-            Matcher matcher = new Matcher(namesAsString, blocks.get(i));
-            list.add(matcher.getOutputMapForBlock());
+        List<Map<String, List<Location>>> list;
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        ArrayList<Future<Map<String, List<Location>>>> futures = new ArrayList<>();
+        for (TextBlock block : blocks) {
+            Future<Map<String, List<Location>>> taskSubmited = executorService.submit(() -> {
+                Matcher matcher = new Matcher(namesAsString, block);
+                return matcher.getOutputMapForBlock();
+            });
+            futures.add(taskSubmited);
         }
-
+        list = futures.stream().map(Main::getResult).collect(Collectors.toList());
+        executorService.shutdown();
         Aggregator aggregator = new Aggregator(list);
         aggregator.showResult();
+    }
+
+    private static Map<String, List<Location>> getResult(Future<Map<String, List<Location>>> future) {
+        try {
+            return future.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyMap();
     }
 
 }
