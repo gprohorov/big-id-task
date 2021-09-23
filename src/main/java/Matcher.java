@@ -61,9 +61,9 @@ public class Matcher {
         text = text.replaceAll("[^A-Za-z]", " ");
         while(true){
             position = text
-                    .indexOf(" " + keyword + " ", position);
+                    .indexOf(" " + keyword + " ", position);  // surround by spaces to avoid complications
             if(position != -1) {
-                list.add(position);
+                list.add(position + 1);  //  + 1  - because of the first space in keyword
                 position++;
             }else{
                 break;

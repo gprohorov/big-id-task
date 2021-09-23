@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
   @project   big-id-task
   @class  MatcherTest
   @version  1.0.0 
-  @since 23.09.21 - 20.57
+  @since 22.09.21 - 20.57
 */
 
 public class MatcherTest {
@@ -37,16 +37,16 @@ public class MatcherTest {
     }
 
     @org.junit.Test
-    public void whenNameArthurThenThreeCharMatching() {
+    public void whenNameArthurThenThreeAbsMatching() {
         Matcher matcher = new Matcher(null, null);
         List<Integer> matchings = matcher.getMatchesAbsPositionsInText("Arthur", text);
         Assert.assertEquals(3, matchings.size());
         int actual = matchings.get(0);
-        Assert.assertEquals(71, actual);
+        Assert.assertEquals(72, actual);
          actual = matchings.get(1);
-        Assert.assertEquals(116, actual);
+        Assert.assertEquals(117, actual);
          actual = matchings.get(2);
-        Assert.assertEquals(1078, actual);
+        Assert.assertEquals(1079, actual);
     }
 
 
