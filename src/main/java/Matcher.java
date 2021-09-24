@@ -12,7 +12,7 @@ import model.Location;
 import model.TextBlock;
 
 import java.util.*;
-import java.util.function.Supplier;
+
 
 public class Matcher {
    private String namesAsString;

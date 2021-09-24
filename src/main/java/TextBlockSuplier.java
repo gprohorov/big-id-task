@@ -3,7 +3,7 @@
   @project   big-id-task
   @class  TextBlockSupplier
   @version  1.0.0 
-  @since 24.09.21 - 13.02
+  @since 22.09.21 - 13.02
 */
 
 import model.Location;
@@ -13,15 +13,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class TextBlockSuplier {
     private final String urlAsString;
@@ -73,7 +69,7 @@ public class TextBlockSuplier {
     }
 
     private String getText(List<String> list){
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size() ; i++) {
             sb.append(list.get(i) + System.lineSeparator());
         }
