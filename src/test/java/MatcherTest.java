@@ -26,7 +26,7 @@ public class MatcherTest {
     @org.junit.Test
     public void whenNameArthurThenThreeLinesMatching() {
         Matcher matcher = new Matcher(null, null);
-        List<Integer> lines = matcher.getListOfLinesWhereMatches("Arthur", text);
+        List<Integer> lines = matcher.getLineOffsets("Arthur", text);
         Assert.assertEquals(3, lines.size());
         int actual = lines.get(0);
         Assert.assertEquals(1, actual);
@@ -39,7 +39,7 @@ public class MatcherTest {
     @org.junit.Test
     public void whenNameArthurThenThreeAbsMatching() {
         Matcher matcher = new Matcher(null, null);
-        List<Integer> matchings = matcher.getMatchesAbsPositionsInText("Arthur", text);
+        List<Integer> matchings = matcher.getCharOffsets("Arthur", text);
         Assert.assertEquals(3, matchings.size());
         int actual = matchings.get(0);
         Assert.assertEquals(72, actual);

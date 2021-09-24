@@ -40,12 +40,12 @@ public class Matcher {
         for (int i = 0; i < getNames().length; i++) {
             String keyword = getNames()[i];
             String text = block.getText();
-            List<Integer> absMatches = getMatchesAbsPositionsInText(keyword, text);
-            List<Integer> lineMatches = getListOfLinesWhereMatches(keyword, text);
+            List<Integer> absMatches = getCharOffsets(keyword, text);
+            List<Integer> lineMatches = getLineOffsets(keyword, text);
             if (absMatches.size() != lineMatches.size()) System.out.println("ERROR");
             List<Location> locations = new ArrayList<>();
             for (int j = 0; j < lineMatches.size() ; j++) {
-                int lineOffset = lineMatches.get(j) + this.getBlock().getId()* 1000;
+                int lineOffset = lineMatches.get(j) + this.getBlock().getId() * Constants.LINES_PER_BLOCK;
                 long charOffset = absMatches.get(j)  + this.getBlock().getBeginsFrom();
                 Location location = new Location(lineOffset, charOffset);
                 locations.add(location);
@@ -55,7 +55,7 @@ public class Matcher {
         return  map;
     }
 
-    public List<Integer> getMatchesAbsPositionsInText(String keyword, String text){
+    public List<Integer> getCharOffsets(String keyword, String text){
         List<Integer> list =  new ArrayList<>();
         int position = 0;
         text = text.replaceAll("[^A-Za-z]", " ");
@@ -72,7 +72,7 @@ public class Matcher {
         return list;
     }
 
-    public List<Integer> getListOfLinesWhereMatches(String keyword, String text){
+    public List<Integer> getLineOffsets(String keyword, String text){
         List<Integer> list =  new ArrayList<>();
         String[] lines = text.split(System.lineSeparator());
         for (int i = 0; i < lines.length ; i++) {

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
+
     public static List<TextBlock> splitTextIntoBlocks(String urlAsString) throws IOException {
 
         List<TextBlock> blocks = new ArrayList<>();
@@ -34,7 +35,7 @@ public class Utils {
             line = reader.readLine();
             countLine++;
             text += line + System.lineSeparator();
-            if (countLine == 1000 || line == null) {
+            if (countLine == Constants.LINES_PER_BLOCK || line == null) {
                 TextBlock block = new TextBlock(countBlock, beginsFrom, text);
                 blocks.add(block);
                 if (line == null) {
