@@ -26,11 +26,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class TextBlockSupplier {
+public class TextBlockSuplier {
     private final String urlAsString;
 
 
-    public TextBlockSupplier(String urlAsString) throws IOException {
+    public TextBlockSuplier(String urlAsString) throws IOException {
         this.urlAsString = urlAsString;
     }
 
@@ -40,7 +40,7 @@ public class TextBlockSupplier {
         List<String> lines = new ArrayList<>();
         List<Map<String, List<Location>>> maps = new ArrayList<>();
         int[] cursor = new int[2];  // [0] - number of a block, [1] - value of the 1st char in a block
-        ExecutorService executorService = Executors.newFixedThreadPool(100);
+        ExecutorService executorService = Executors.newFixedThreadPool(50);
         new BufferedReader(new InputStreamReader(new URL(urlAsString).openStream()))
                 .lines()
                 .forEach(line->{

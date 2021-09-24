@@ -8,11 +8,8 @@
 
 
 import model.Location;
-import model.TextBlock;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -30,7 +27,7 @@ public class Main {
                 "Joshua,Jerry,Dennis,Walter,Patrick,Peter,Harold,Douglas," +
                 "Henry,Carl,Arthur,Ryan,Roger";
 
-        List<Map<String, List<Location>>> list = new TextBlockSupplier(urlAsString).asyncMatching();
+        List<Map<String, List<Location>>> list = new TextBlockSuplier(urlAsString).asyncMatching();
         Aggregator aggregator = new Aggregator(list);
         aggregator.showResult();
     }
