@@ -33,7 +33,7 @@ public class Main {
 
         List<TextBlock> blocks = Utils.splitTextIntoBlocks(urlAsString);
         List<Map<String, List<Location>>> list;
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        ExecutorService executorService = Executors.newFixedThreadPool(50);
         ArrayList<Future<Map<String, List<Location>>>> futures = new ArrayList<>();
         for (TextBlock block : blocks) {
             Future<Map<String, List<Location>>> taskSubmited = executorService.submit(() -> {
