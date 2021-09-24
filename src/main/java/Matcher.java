@@ -35,6 +35,7 @@ public class Matcher {
         return this.getNamesAsString().split(",");
     }
 
+    // merge lineoffsets and charoffsets
     public Map<String, List<Location>> getOutputMapForBlock(){
         Map<String, List<Location>> map = new HashMap<>();
         for (int i = 0; i < getNames().length; i++) {
@@ -58,7 +59,7 @@ public class Matcher {
     public List<Integer> getCharOffsets(String keyword, String text){
         List<Integer> list =  new ArrayList<>();
         int position = 0;
-        text = text.replaceAll("[^A-Za-z]", " ");
+        text = text.replaceAll("[^A-Za-z]", " "); // remove trash
         while(true){
             position = text
                     .indexOf(" " + keyword + " ", position);  // surround by spaces to avoid complications

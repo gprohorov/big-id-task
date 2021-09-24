@@ -36,10 +36,9 @@ public class Aggregator {
         }
         return  mapOutput;
     }
-
+    // write aggregated list to the console according to the task requirements format
     public void showResult(){
         Map<String, List<Location>> map = this.aggregateList();
-
         for (Map.Entry<String, List<Location>> entry : map.entrySet()){
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
