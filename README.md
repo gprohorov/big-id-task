@@ -9,4 +9,5 @@ Master branch was design without multi-threading  as a base variant.
 
 This one implements ExecutorService in order to run each matcher in a separate thread.
 
-BTW. The example in the documentation doesn't correspond to the real text file.
+In the branch  **async**   https://github.com/gprohorov/big-id-task/tree/async
+ the algorithm is more optimized on the base of **CompletableFuture** 
