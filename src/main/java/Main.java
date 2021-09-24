@@ -12,10 +12,7 @@ import model.TextBlock;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -34,14 +31,16 @@ public class Main {
         List<TextBlock> blocks = Utils.splitTextIntoBlocks(urlAsString);
         List<Map<String, List<Location>>> list;
         ExecutorService executorService = Executors.newFixedThreadPool(50);
-        ArrayList<Future<Map<String, List<Location>>>> futures = new ArrayList<>();
+        ArrayList<CompletableFuture<Map<String, List<Location>>>> futures = new ArrayList<>();
         for (TextBlock block : blocks) {
-            Future<Map<String, List<Location>>> taskSubmited = executorService.submit(() -> {
+            CompletableFuture<Map<String, List<Location>>> taskSubmited = CompletableFuture
+                    .supplyAsync(() -> {
                 Matcher matcher = new Matcher(namesAsString, block);
                 return matcher.getOutputMapForBlock();
-            });
+            }, executorService);
             futures.add(taskSubmited);
         }
+
         list = futures.stream().map(Main::getResult).collect(Collectors.toList());
         executorService.shutdown();
         Aggregator aggregator = new Aggregator(list);
