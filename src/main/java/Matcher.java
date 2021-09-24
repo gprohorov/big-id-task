@@ -12,15 +12,21 @@ import model.Location;
 import model.TextBlock;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class Matcher {
-   private final String namesAsString;
+   private String namesAsString;
    private final TextBlock block;
 
 
     public Matcher(String namesAsString, TextBlock block) {
         this.namesAsString = namesAsString;
         this.block = block;
+    }
+
+    public Matcher(TextBlock block) {
+        this.block = block;
+        this.namesAsString = Constants.NAMES_AS_STRING;
     }
 
     public TextBlock getBlock() {
@@ -45,7 +51,7 @@ public class Matcher {
             if (absMatches.size() != lineMatches.size()) System.out.println("ERROR");
             List<Location> locations = new ArrayList<>();
             for (int j = 0; j < lineMatches.size() ; j++) {
-                int lineOffset = lineMatches.get(j) + this.getBlock().getId()* 1000;
+                int lineOffset = lineMatches.get(j) + this.getBlock().getId() * Constants.LINES_IN_BLOCK;
                 long charOffset = absMatches.get(j)  + this.getBlock().getBeginsFrom();
                 Location location = new Location(lineOffset, charOffset);
                 locations.add(location);

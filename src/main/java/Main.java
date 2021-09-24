@@ -15,10 +15,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
 
         String urlAsString = "https://norvig.com/big.txt";
         String namesAsString = "James,John,Robert,Michael,William,David,Richard," +
@@ -29,14 +30,7 @@ public class Main {
                 "Joshua,Jerry,Dennis,Walter,Patrick,Peter,Harold,Douglas," +
                 "Henry,Carl,Arthur,Ryan,Roger";
 
-        List<TextBlock> blocks = Utils.splitTextIntoBlocks(urlAsString);
-        List<Map<String, List<Location>>> list = new ArrayList<>();
-
-        for (int i = 0; i < blocks.size() ; i++) {
-            Matcher matcher = new Matcher(namesAsString, blocks.get(i));
-            list.add(matcher.getOutputMapForBlock());
-        }
-
+        List<Map<String, List<Location>>> list = new TextBlockSupplier(urlAsString).asyncMatching();
         Aggregator aggregator = new Aggregator(list);
         aggregator.showResult();
     }
