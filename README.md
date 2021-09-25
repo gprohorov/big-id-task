@@ -16,7 +16,7 @@ Design and implement a simple Java program to find specific strings in a large t
 
 Advantages: memory load is low.
 
-Processing time: 20% lower than that of **ExecutorService** approach.
+Processing time: 15% lower than that of the ordinary **ExecutorService** approach.  https://github.com/gprohorov/big-id-task/tree/ex-service
   
 In the Main class raw results  are written to console via **aggregator.showRawResults()**
 
