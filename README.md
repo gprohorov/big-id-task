@@ -5,9 +5,13 @@ _Design and implement a simple Java program to find specific strings in a large 
 
 Lines and position enumeration begins from 0 according to Java style.
 
-Master branch was design without multi-threading  as a base variant.
+ A huge text is sliced into an intermediate set of blocks (1000 lines per block).  
 
-This one implements ExecutorService in order to run each matcher in a separate thread.
+  After that each block is processed by Matcher in a thread via **ExecutorService**
+
+Such a way is proposed because slicing process takes a short time compared with matching one. 
+
+Disadvantage: memory overload;
 
 In the branch  **async**   https://github.com/gprohorov/big-id-task/tree/async
  the algorithm is more optimized on the base of **CompletableFuture** 
