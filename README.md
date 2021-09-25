@@ -2,9 +2,9 @@
 
 Design and implement a simple Java program to find specific strings in a large text..
 
-  TextBlockSuplier cut from a huge text  portions of 1000 lines one by one.
+  TextBlockSuplier cut of the portions of 1000 lines one by one from the huge text   .
 
-  Each portion is processed by the Matcher in a separate thread ( **CompletableFuture** ).
+  Each portion is sent to the Matcher and is processed in a separate thread ( **CompletableFuture** ).
 
  The result is a list of Map<String, List<Location>>
 
@@ -13,3 +13,7 @@ Design and implement a simple Java program to find specific strings in a large t
   List is flatted to map.
 
   As was asked in the task.
+  
+In the Main class raw results  are written to console via **aggregator.showRawResults()**
+
+More fine output provides **aggregator.showPretty();** method.

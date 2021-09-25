@@ -11,6 +11,7 @@
 import model.Location;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Aggregator {
 
@@ -31,20 +32,45 @@ public class Aggregator {
             List<Location> locations = new ArrayList<>();
             for (Map<String, List<Location>> map: this.getListOfMaps()){
                locations.addAll(map.get(keyword));
+               locations = locations.stream()
+                       .sorted(Comparator.comparing(Location::getLineOffset).thenComparing(Location::getCharOffset))
+                       .collect(Collectors.toList());
             }
             mapOutput.put(keyword, locations);
         }
         return  mapOutput;
     }
 
-    public void showResult(){
+    public void showRawResults(){
         Map<String, List<Location>> map = this.aggregateList();
-
         for (Map.Entry<String, List<Location>> entry : map.entrySet()){
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
-
     }
 
+    public void showPretty(){
+        StringBuilder stringBuilder;
+        String spaces = "                       ";
+        String key = null;
+        Map<String, List<Location>> map = this.aggregateList();
+        for (Map.Entry<String, List<Location>> entry : map.entrySet()){
+            System.out.println();
+            key = entry.getKey();
+            stringBuilder = new StringBuilder();
+            String prefix = stringBuilder.append(spaces, 0, key.length() + 5).toString();
+            System.out.print(entry.getKey() + " -> " );
+            if (entry.getValue().isEmpty()) {
+                System.out.println("[]");
+            }else {
+                for (int i = 0; i < entry.getValue().size(); i++) {
+                    if (i == 0 ){
+                        System.out.println(" " + entry.getValue().get(i));
+                    }else{
+                        System.out.println(prefix + entry.getValue().get(i));
+                    }
+                }
+            }
+        }
+    }
 
 }

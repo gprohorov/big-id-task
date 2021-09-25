@@ -29,7 +29,8 @@ public class Main {
 
         List<Map<String, List<Location>>> list = new TextBlockSuplier(urlAsString).asyncMatching();
         Aggregator aggregator = new Aggregator(list);
-        aggregator.showResult();
+        aggregator.showRawResults();
+       //  aggregator.showPretty();     // Fine ouput format. Workable.
     }
 
 }
