@@ -12,6 +12,7 @@ Lines and position enumeration begins from 0 according to Java style.
 Such a way is proposed because slicing process takes a short time compared with matching one. 
 
 Disadvantage: memory overload;
+Processing time:  35% lower than that of non-multithreading approach.
 
 In the branch  **async**   https://github.com/gprohorov/big-id-task/tree/async
  the algorithm is more optimized on the base of **CompletableFuture** 
