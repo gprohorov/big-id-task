@@ -9,4 +9,7 @@ Master branch was design without multi-threading  as a base variant.
 
 This one implements ExecutorService in order to run each matcher in a separate thread.
 
-BTW. The example in the documentation doesn't correspond to the real text file.
+The diiference from ex-service approach ( https://github.com/gprohorov/big-id-task/tree/com-future )  is in the usage of CompletableFuture instead of Future.
+
+There is no difference in processing time between these approaches.
+
